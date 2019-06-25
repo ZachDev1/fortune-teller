@@ -102,7 +102,7 @@ cf add-network-policy fortune-ui --destination-app fortune-service --protocol tc
 #### 10. Config Server with CredHub Backend
 
 ```
-export config_server_url=`cf service fortunes-config-server | grep "dashboard:" | cut -c 19- | cut -d "/" -f 1-3`
+export config_server_url=`cf service fortunes-config-server | grep "dashboard:" | cut -c 18- | cut -d "/" -f 1-3`
 curl $config_server_url/secrets/fortune-ui/cloud/master/my-cloud-secret -H "Authorization: $(cf oauth-token)" -X PUT -k --data '{"my-secret-cloud-key": "my-super-secret-cloud-value"}' -H "Content-Type: application/json"
 curl -X POST -k https://$app_url/actuator/bus-refresh
 ```
