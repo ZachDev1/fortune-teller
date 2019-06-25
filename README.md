@@ -70,7 +70,7 @@ curl -X POST -k https://$app_url/actuator/bus-refresh
 - To show fortune-ui discovering fortune-service using Direct Registration Mode, run the following commands. 
 ```
 export app2_hostname=`cf app fortune-service | grep "routes:" | cut -c 20- | cut -d "." -f 1`
-export app2_domain=`cf app fortune-service | grep "routes:" | cut -c 20- | cut -d "." -f 2,3`
+export app2_domain=`cf app fortune-service | grep "routes:" | cut -c 20- | cut -d "." -f 2-`
 cf unmap-route fortune-service $app2_domain --hostname $app2_hostname
 cf set-env fortune-service SPRING_PROFILES_ACTIVE eurekaDirect
 cf restart fortune-service
@@ -85,7 +85,7 @@ cf add-network-policy fortune-ui --destination-app fortune-service --protocol tc
 ```
 # If you skipped step 8, uncomment the next three lines
 #export app2_hostname=`cf app fortune-service | grep "routes:" | cut -c 20- | cut -d "." -f 1`
-#export app2_domain=`cf app fortune-service | grep "routes:" | cut -c 20- | cut -d "." -f 2,3`
+#export app2_domain=`cf app fortune-service | grep "routes:" | cut -c 20- | cut -d "." -f 2-`
 #cf unmap-route fortune-service $app2_domain --hostname $app2_hostname
 cf map-route fortune-service apps.internal --hostname fortune-teller-fortune-service
 cf set-env fortune-service SPRING_PROFILES_ACTIVE mesh
